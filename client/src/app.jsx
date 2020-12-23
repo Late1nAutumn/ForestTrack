@@ -38,29 +38,27 @@ class App extends React.Component {
     this.state = { x: 0, y: 0, time: "", latitude: 0, longitude: 0 };
   }
   componentDidMount() {
-    setInterval(
-      () =>
-        axios.get(WA_URL).then(
-          ({ data }) => {
-            var tar = document.getElementById("map");
+    var update = axios.get(WA_URL).then(
+      ({ data }) => {
+        var tar = document.getElementById("map");
 
-            var { time, latitude, longitude } = data.data;
-            var { x, y } = translateCoord(latitude, longitude);
+        var { time, latitude, longitude } = data.data;
+        var { x, y } = translateCoord(latitude, longitude);
 
-            x = (x * tar.offsetWidth) / 100 + getOffset(tar).left;
-            y = (((y * tar.offsetWidth) / 1014) * 879) / 100 + 40;
-            this.setState({
-              x,
-              y,
-              time,
-              latitude,
-              longitude,
-            });
-          },
-          (err) => console.error(err)
-        ),
-      5000
+        x = (x * tar.offsetWidth) / 100 + getOffset(tar).left;
+        y = (((y * tar.offsetWidth) / 1014) * 879) / 100 + 40;
+        this.setState({
+          x,
+          y,
+          time,
+          latitude,
+          longitude,
+        });
+      },
+      (err) => console.error(err)
     );
+    update();
+    setInterval(update, 5000);
   }
   render() {
     return (
