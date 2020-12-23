@@ -1,7 +1,7 @@
 const express = require("express");
 const bParser = require("body-parser");
 const path = require("path");
-const port = 3000;
+const port = process.env.PORT || 3000;
 const ctrl = require("./ctrl");
 
 const app = express();
