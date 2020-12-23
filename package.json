@@ -8,8 +8,10 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "build": "webpack -w",
-    "start": "nodemon server/index.js",
+    "build": "webpack",
+    "building": "webpack -w",
+    "start": "node server/index.js",
+    "starting": "nodemon server/index.js",
     "test": ""
   },
   "dependencies": {
